@@ -1,0 +1,53 @@
+# 使用專案指定的 Node.js 版本
+FROM node:20.15.0
+
+# 安裝 pnpm
+RUN npm install -g pnpm@10.2.1
+
+# 設定工作目錄
+WORKDIR /app
+
+# 創建臨時目錄並初始化 Next.js 專案
+RUN mkdir temp && cd temp && \
+    pnpm dlx create-next-app@latest . \
+    --ts \
+    --tailwind \
+    --eslint \
+    --app \
+    --src-dir \
+    --import-alias "@/*" \
+    --no-git \
+    --yes && \
+    mv * ../ && \
+    cd .. && \
+    rm -rf temp
+
+# 安裝專案依賴
+RUN pnpm add @tanstack/react-query@5.66.9 \
+    zustand@5.0.3 \
+    react-hook-form@7.54.2 \
+    zod@3.24.2 \
+    styled-jsx@5.1.6 \
+    @swc/helpers@0.5.3
+
+# 安裝開發依賴
+RUN pnpm add -D \
+    @typescript-eslint/eslint-plugin@8.24.1 \
+    @typescript-eslint/parser@8.24.1 \
+    prettier@latest \
+    postcss@8.5.3 \
+    autoprefixer@10.4.20
+
+# 複製源代碼
+COPY . .
+
+# 設置開發環境變數
+ENV NODE_ENV=development
+ENV WATCHPACK_POLLING=true
+ENV PORT=3000
+
+# 開放連接埠
+EXPOSE 3000
+
+# 啟動開發伺服器
+CMD ["pnpm", "dev"]

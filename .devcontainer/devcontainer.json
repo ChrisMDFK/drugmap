@@ -1,0 +1,23 @@
+{
+    "name": "Frontend Development",
+    "dockerComposeFile": ["../docker/docker-compose.dev.yml"],  // 修正路徑
+    "service": "frontend",
+    "workspaceFolder": "/app",
+    "customizations": {
+      "vscode": {
+        "settings": {
+          "typescript.tsdk": "node_modules/typescript/lib",
+          "typescript.enablePromptUseWorkspaceTsdk": true,
+          "editor.formatOnSave": true,
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "extensions": [
+          "dbaeumer.vscode-eslint",
+          "esbenp.prettier-vscode",
+          "bradlc.vscode-tailwindcss",
+          "ms-vscode.vscode-typescript-next"
+        ]
+      }
+    },
+    "remoteUser": "node"
+  }
