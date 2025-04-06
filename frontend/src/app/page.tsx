@@ -1,5 +1,5 @@
 import React from 'react';
-import WorkspaceCanvas from '../components/workspace/WorkspaceCanvas';
+import WorkspaceCanvas from '../components/drugmap/WorkspaceCanvas';
 
 export default function Page() {
   return (

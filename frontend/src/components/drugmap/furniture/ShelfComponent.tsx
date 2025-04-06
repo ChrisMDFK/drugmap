@@ -1,3 +1,4 @@
+'use client';
 import React, { useState, useEffect } from 'react';
 import { Settings, Trash2 } from 'lucide-react';
 
@@ -5,17 +6,17 @@ import { Settings, Trash2 } from 'lucide-react';
 const ShelfComponent = ({ data, onDrag, isSelected, onSelect, onDelete, onEdit }) => {
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
-  
+
   const handleMouseDown = (e) => {
     setIsDragging(true);
     setDragStart({
       x: e.clientX - data.position.x,
-      y: e.clientY - data.position.y
+      y: e.clientY - data.position.y,
     });
     onSelect();
     e.stopPropagation();
   };
-  
+
   const handleMouseMove = (e) => {
     if (isDragging) {
       const newX = e.clientX - dragStart.x;
@@ -23,11 +24,11 @@ const ShelfComponent = ({ data, onDrag, isSelected, onSelect, onDelete, onEdit }
       onDrag(data.id, newX, newY);
     }
   };
-  
+
   const handleMouseUp = () => {
     setIsDragging(false);
   };
-  
+
   useEffect(() => {
     if (isDragging) {
       window.addEventListener('mousemove', handleMouseMove);
@@ -36,15 +37,15 @@ const ShelfComponent = ({ data, onDrag, isSelected, onSelect, onDelete, onEdit }
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseup', handleMouseUp);
     }
-    
+
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseup', handleMouseUp);
     };
   }, [isDragging]);
-  
+
   return (
-    <div 
+    <div
       className={`absolute bg-yellow-100 border-2 rounded-lg shadow-md flex flex-col ${
         isSelected ? 'border-blue-500' : 'border-yellow-300'
       }`}
@@ -54,23 +55,23 @@ const ShelfComponent = ({ data, onDrag, isSelected, onSelect, onDelete, onEdit }
         width: `${data.dimensions.width}px`,
         height: `${data.dimensions.height}px`,
         cursor: isDragging ? 'grabbing' : 'grab',
-        zIndex: isDragging || isSelected ? 10 : 1
+        zIndex: isDragging || isSelected ? 10 : 1,
       }}
       onMouseDown={handleMouseDown}
     >
       <div className="bg-yellow-200 p-2 text-sm font-bold flex justify-between items-center">
         <span>{data.name}</span>
         <div className="flex gap-1">
-          <Settings 
-            size={16} 
+          <Settings
+            size={16}
             className="cursor-pointer hover:text-yellow-700"
             onClick={(e) => {
               e.stopPropagation();
               onEdit();
             }}
           />
-          <Trash2 
-            size={16} 
+          <Trash2
+            size={16}
             className="cursor-pointer hover:text-red-500"
             onClick={(e) => {
               e.stopPropagation();
@@ -81,9 +82,11 @@ const ShelfComponent = ({ data, onDrag, isSelected, onSelect, onDelete, onEdit }
       </div>
       <div className="flex-1 p-2">
         <div className="grid grid-cols-2 h-full gap-1">
-          {Array(6).fill(0).map((_, i) => (
-            <div key={i} className="bg-yellow-50 border border-yellow-200 rounded"></div>
-          ))}
+          {Array(6)
+            .fill(0)
+            .map((_, i) => (
+              <div key={i} className="bg-yellow-50 border border-yellow-200 rounded"></div>
+            ))}
         </div>
       </div>
     </div>
