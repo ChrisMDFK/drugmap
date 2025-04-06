@@ -1,0 +1,13 @@
+開始運行DOCKER
+docker-compose -f docker/docker-compose.dev.yml up --build
+
+// GIT上傳與更新 //
+git add .
+git commit -m "更新說明"
+git push
+
+// GIT狀態檢查與常用查詢 //
+git status        # 檢查目前變動狀態
+git log --oneline # 查看 commit 紀錄
+git branch        # 查看目前分支
+git remote -v     # 查看遠端資訊

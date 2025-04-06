@@ -1,2 +1,0 @@
-開始運行DOCKER
-docker-compose -f docker/docker-compose.dev.yml up --build
