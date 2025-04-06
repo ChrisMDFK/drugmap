@@ -1,7 +1,7 @@
 import React from 'react';
-import WorkspaceCanvas from '../components/drugmap/WorkspaceCanvas';
+import WorkspaceCanvas from '@/components/drugmap/WorkspaceCanvas';
 
-export default function Page() {
+export default function Page(): React.ReactElement {
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="py-4 px-4 sm:px-6 lg:px-8">

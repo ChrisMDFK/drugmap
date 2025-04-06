@@ -30,6 +30,11 @@ RUN pnpm add @tanstack/react-query@5.66.9 \
     styled-jsx@5.1.6 \
     @swc/helpers@0.5.3
 
+    # 藥品地圖
+    lucide-react \
+    clsx \
+    tailwind-merge
+
 # 安裝開發依賴
 RUN pnpm add -D \
     @typescript-eslint/eslint-plugin@8.24.1 \
